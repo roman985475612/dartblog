@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load sidebar %}
+
+{% block title %}{{ post.title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+<section class="single-blog-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="border-top">
+          <div class="col-md-8">
+            <div class="blog-area">
+              <div class="blog-area-part">
+                <br><span class="h3 text-muted">Category: {{ post.category }}</span>
+                <h2>{{ post.title }}</h2>
+                {% if post.tags.exists %}
+                  <br><br>
+                  {% for tag in post.tags.all %}
+                    <span class="badge bg-secondary">{{ tag }}</span>
+                  {% endfor %}
+                {% endif %}
+                <br><br>Views: {{ post.views }}<br>
+                {{ post.content|safe }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            {% show_search %}
+            {% show_popular_posts %}
+            {% show_tags %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
